@@ -28,9 +28,7 @@ class XmppClient {
 	public function new() {
     }
 
-	public function login(jid: JID, password: String, ?ip : String, callback : String->Void ) {
-
-		if( ip == null ) ip = jid.domain;
+	public function login(jid: JID, password: String, host: String, callback: String->Void) {
 
 		function sendData(str:String) {
 			print( xmpp.xml.Printer.print(str,true), 32 );
@@ -57,7 +55,7 @@ class XmppClient {
 
 		stream.output = sendData;
 
-		socket.connect( xmpp.client.Stream.PORT, ip, function() {
+		socket.connect( xmpp.client.Stream.PORT, host, function() {
 			stream.start( features->{
 				trace(features);
 				stream.startTLS(success->{

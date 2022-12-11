@@ -22,6 +22,7 @@ function main() {
     if(password == null) abort('missing password');
     if(recipient == null) abort('missing recipient');
     if(message == null) abort('missing message');
+    if(host == null) host = jid.domain;
    
     var xmpp = new XmppClient();
     xmpp.login( jid, password, host, e -> {
