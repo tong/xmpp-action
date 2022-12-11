@@ -1,4 +1,4 @@
--js xmpp.js
+-js index.js
 -main Main
 -cp src
 -lib hxmpp
