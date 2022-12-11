@@ -15,8 +15,9 @@ jobs:
       - name: Setup
         run: |
           haxe --version
+          haxelib install hxnodejs
           haxelib git sasl https://github.com/tong/hxsasl
-          haxelib install build.hxml --always
+          haxelib git hxmpp https://github.com/tong/hxmpp
       - name: Build
         run: haxe build.hxml
       - name: Send push event notification
