@@ -1,4 +1,4 @@
-# gha-xmpp
+# xmpp-action
 
 Use xmpp in github actions.
 
