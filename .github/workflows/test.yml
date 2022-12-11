@@ -20,7 +20,7 @@ jobs:
       - name: Build
         run: haxe build.hxml
       - name: Send push event notification
-        uses: tong/xmpp-action@main
+        uses: ./
         if: github.event_name == 'push'
         with:
           jid: ${{ secrets.jid }}
@@ -30,7 +30,7 @@ jobs:
             ${{ github.actor }} pushed ${{ github.event.ref }} ${{ github.event.compare }} with message:
             ${{ join(github.event.commits.*.message) }}
       - name: Send pr event notification
-        uses: tong/xmpp-action@main
+        uses: ./
         if: github.event_name == 'push'
         with:
           jid: ${{ secrets.jid }}
