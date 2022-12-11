@@ -1,0 +1,26 @@
+name: "Xmpp"
+description: "Send xmpp messages"
+author: "tong <tong@disktree.net>"
+runs:
+  using: "node16"
+  main: "index.js"
+inputs:
+  jid:
+    description: "Account jabber id"
+    required: true
+  password:
+    description: "Account password"
+    required: true
+  recipient:
+    description: "Jid of the message recipent"
+    required: true
+  message:
+    description: "Message to send"
+    required: true
+  host:
+    description: "Host name of account server"
+    required: false
+  port:
+    description: "Server port"
+    required: false
+    default: 5222
