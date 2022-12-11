@@ -88,4 +88,12 @@ class XmppClient {
 			});
 		});
 	}
+
+    public function logout() {
+        stream.onEnd = () -> {
+            trace('onEnd');
+            socket.end();
+        }
+        stream.end();
+    }
 }

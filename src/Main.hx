@@ -22,7 +22,13 @@ function main() {
     if(password == null) abort('missing password');
     if(recipient == null) abort('missing recipient');
     if(message == null) abort('missing message');
-    if(host == null) host = jid.domain;
+    if(host == null || host.length == 0) host = jid.domain;
+
+    trace('jid=$jid');
+    trace('password='+[for(i in 0...password.length)"*"].join(''));
+    trace('recipient=$recipient');
+    trace('message=$message');
+    trace('host=$host');
    
     var xmpp = new XmppClient();
     xmpp.login( jid, password, host, e -> {
@@ -30,6 +36,7 @@ function main() {
             Sys.println("Client connected");
             xmpp.stream.send(new Presence());
             xmpp.stream.send(new Message(recipient, message));
+            haxe.Timer.delay(xmpp.logout, 400);
         } else {
             Sys.stderr().writeString(e);
             Sys.exit(1); 
