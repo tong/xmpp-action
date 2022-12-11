@@ -3,30 +3,32 @@ import xmpp.JID;
 import xmpp.Presence;
 import xmpp.Message;
 
+function abort(code = 1, ?message: String) {
+    if( message != null) Sys.stderr().writeString('$message\n');
+    Sys.exit(code);
+}
+
 function main() {
-
-    var args = Sys.args();
-    if( args.length < 2 ) {
-        Sys.stderr().writeString( 'Invalid arguments\n' );
-        Sys.println( '  Usage: xmpp <jid> <password> <?ip>' );
-        Sys.exit(1);
-    }
-
-    var jid : JID = args[0];
-    if( jid.resource == null ) jid.resource = 'hxmpp';
-    var password = args[1];
-    var ip = (args[2] == null) ? jid.domain : args[2];
     
-    var receiver = "tong@x.disktree.net";
-    var subject = null;
-    var body = "hello!";
-
+    var _jid = Sys.getEnv('INPUT_JID');
+    if(_jid == null) abort('missing jid');
+   
+    var jid : JID = _jid;
+    var password = Sys.getEnv('INPUT_PASSWORD');
+    var recipient = Sys.getEnv('INPUT_RECIPIENT');
+    var message = Sys.getEnv('INPUT_MESSAGE');
+    var host = Sys.getEnv('INPUT_HOST');
+   
+    if(password == null) abort('missing password');
+    if(recipient == null) abort('missing recipient');
+    if(message == null) abort('missing message');
+   
     var xmpp = new XmppClient();
-    xmpp.login( jid, password, ip, e -> {
+    xmpp.login( jid, password, host, e -> {
         if(e == null){
             Sys.println("Client connected");
             xmpp.stream.send(new Presence());
-            xmpp.stream.send(new Message(receiver, body, subject));
+            xmpp.stream.send(new Message(recipient, message));
         } else {
             Sys.stderr().writeString(e);
             Sys.exit(1); 
