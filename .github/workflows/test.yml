@@ -32,13 +32,13 @@ jobs:
             ${{ join(github.event.commits.*.message) }}
       - name: Send pr event notification
         uses: ./
-        if: github.event_name == 'push'
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
         with:
           jid: ${{ secrets.jid }}
           password: ${{ secrets.password }}
           recipient: ${{ secrets.recipient }}
           message: |
-            ${{ github.actor }} pushed ${{ github.event.ref }} ${{ github.event.compare }} with message:
-            ${{ join(github.event.commits.*.message) }}
+            ${{ github.actor }} opened a PR : ${{ github.event.pull_request.html_url }} with message :
+            ${{ github.event.pull_request.title }}
 
 
