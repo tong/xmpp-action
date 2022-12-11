@@ -11,7 +11,6 @@ import js.node.tls.TLSSocket;
 
 using xmpp.client.Authentication;
 using xmpp.client.StartTLS;
-using xmpp.client.Roster;
 
 class XmppClient {
 
