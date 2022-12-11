@@ -17,7 +17,7 @@ jobs:
           haxe --version
           haxelib install hxnodejs
           haxelib git sasl https://github.com/tong/hxsasl
-          haxelib dev hxmpp .
+          haxelib git hxmpp https://github.com/tong/hxmpp --skip-dependencies
       - name: Build
         run: haxe build.hxml
       - name: Send push event notification
