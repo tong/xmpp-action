@@ -1,4 +1,7 @@
 
+import js.Node.console;
+import js.node.net.Socket;
+import js.node.tls.TLSSocket;
 import xmpp.JID;
 import xmpp.IQ;
 import xmpp.Message;
@@ -6,8 +9,6 @@ import xmpp.Presence;
 import xmpp.Stream;
 import xmpp.client.Stream;
 import xmpp.XML;
-import js.node.net.Socket;
-import js.node.tls.TLSSocket;
 
 using xmpp.client.Authentication;
 using xmpp.client.StartTLS;
@@ -46,37 +47,36 @@ class XmppClient {
 		}
 
 		socket = new Socket();
-		socket.on( Data, recvData );
-		socket.on( End, () -> trace('Socket disconnected') );
-		socket.on( Error, e -> trace('Socket error',e) );
+		socket.on( 'data', recvData );
+		socket.on( 'end', () -> console.log('Socket disconnected') );
+		socket.on( 'error', e -> console.error('Socket error',e) );
 
 		stream = new Stream( jid.domain );
-		stream.onPresence = p -> trace( 'Presence from: '+p.from );
-		stream.onMessage = m -> trace( 'Message from: '+m.from );
+        stream.onEnd = () -> socket.end();
+		stream.onPresence = p -> console.log( 'Presence from: '+p.from );
+		stream.onMessage = m -> console.log( 'Message from: '+m.from );
 		stream.onIQ = iq -> {
-			trace( 'Unhandled iq: '+iq );
+			console.warn( 'Unhandled iq: '+iq );
 		}
 
 		stream.output = sendData;
 
 		socket.connect( xmpp.client.Stream.PORT, host, function() {
 			stream.start( features->{
-				trace(features);
 				stream.startTLS(success->{
 					if( success ) {
 						var tls = new js.node.tls.TLSSocket(socket, { requestCert: true, rejectUnauthorized: true });
-						tls.on(End, ()->trace('TLSSocket disconnected'));
-						tls.on(Error, e->trace('TLSSocket error',e));
-						tls.on(Data, recvData);
+						tls.on('end', ()->console.log('TLSSocket disconnected'));
+						tls.on('error', e->console.error('TLSSocket error',e));
+						tls.on('data', recvData);
 						socket = tls;
 						stream.start(features->{
-							for(f in features.elements) trace(f);
 							var mech = new sasl.PlainMechanism(false);
 							//var mech = new sasl.AnonymousMechanism();
 							//var mech = new sasl.SCRAMSHA1Mechanism();
 							stream.authenticate(jid.node, jid.resource, password, mech, (?error)->{
 								if(error != null) {
-									trace(error.condition, error.text);
+									console.error(error.condition, error.text);
 									stream.end();
 									socket.end();
 								} else {
@@ -85,7 +85,7 @@ class XmppClient {
 							});
 						});
 					} else {
-						trace("StartTLS failed");
+						console.error("StartTLS failed");
 						socket.end();
 					}
 				});
@@ -94,10 +94,6 @@ class XmppClient {
 	}
 
     public function logout() {
-        stream.onEnd = () -> {
-            trace('onEnd');
-            socket.end();
-        }
         stream.end();
     }
 }

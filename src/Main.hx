@@ -30,7 +30,7 @@ function main() {
             Sys.println("Connected");
             //xmpp.stream.send(new Presence());
             xmpp.stream.send(new Message(recipient, message));
-            haxe.Timer.delay(xmpp.logout, 400);
+            haxe.Timer.delay(xmpp.logout, 500);
         } else {
             Sys.stderr().writeString(e);
             Sys.exit(1); 
