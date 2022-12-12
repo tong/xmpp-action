@@ -31,13 +31,17 @@ class XmppClient {
 	public function login(jid: JID, password: String, host: String, callback: String->Void) {
 
 		function sendData(str:String) {
+            #if xmpp_debug
 			print( xmpp.xml.Printer.print(str,true), 32 );
+            #end
 			socket.write( str );
 		};
 
 		function recvData(buf) {
 			var str : String = #if nodejs buf.toString() #else buf #end;
+            #if xmpp_debug
 			print( xmpp.xml.Printer.print( str, true ), 33 );
+            #end
 			stream.recv( str );
 		}
 
