@@ -6,7 +6,7 @@ runs:
   main: "index.js"
 inputs:
   jid:
-    description: "Account jabber id"
+    description: "Account jabber id (jid)"
     required: true
   password:
     description: "Account password"
@@ -18,7 +18,7 @@ inputs:
     description: "Message to send"
     required: true
   host:
-    description: "Host name of account server"
+    description: "Server host name"
     required: false
   port:
     description: "Server port"

@@ -2,16 +2,16 @@
 import js.Node.console;
 import js.node.net.Socket;
 import js.node.tls.TLSSocket;
-import xmpp.JID;
 import xmpp.IQ;
+import xmpp.Jid;
 import xmpp.Message;
 import xmpp.Presence;
 import xmpp.Stream;
 import xmpp.client.Stream;
 import xmpp.XML;
 
+using xmpp.StartTLS;
 using xmpp.client.Authentication;
-using xmpp.client.StartTLS;
 
 class XmppClient {
 
@@ -20,16 +20,15 @@ class XmppClient {
 		Sys.println(str);
 	}
 
-	public var jid(default,null) : JID;
+	public var jid(default,null) : Jid;
 	public var stream(default,null) : Stream;
 
 	var socket : Socket;
 	var tls : TLSSocket;
 
-	public function new() {
-    }
+	public function new() {}
 
-	public function login(jid: JID, password: String, host: String, callback: String->Void) {
+	public function login(jid: Jid, password: String, host: String, callback: String->Void) {
 
 		function sendData(str:String) {
             #if xmpp_debug
