@@ -54,7 +54,7 @@ class XmppClient {
         stream.onEnd = () -> socket.end();
 		stream.onPresence = p -> console.log( 'Presence from: '+p.from );
 		stream.onMessage = m -> console.log( 'Message from: '+m.from );
-		stream.onIQ = iq -> {
+		stream.onIQ = (iq,res) -> {
 			console.warn( 'Unhandled iq: '+iq );
 		}
 
