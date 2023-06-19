@@ -70,9 +70,7 @@ class XmppClient {
 						tls.on('data', recvData);
 						socket = tls;
 						stream.start(features->{
-							var mech = new sasl.PlainMechanism(false);
-							//var mech = new sasl.AnonymousMechanism();
-							//var mech = new sasl.SCRAMSHA1Mechanism();
+							var mech = new sasl.SCRAMSHA1Mechanism();
 							stream.authenticate(jid.node, jid.resource, password, mech, (?error)->{
 								if(error != null) {
 									console.error(error.condition, error.text);

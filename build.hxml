@@ -9,4 +9,3 @@
 -D js-es=6
 -D message.reporting=pretty
 -D no-deprecation-warnings
--D xmpp_debug
