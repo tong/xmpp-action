@@ -12,7 +12,7 @@ inputs:
     description: "Account password"
     required: true
   recipient:
-    description: "Jid of the message recipent"
+    description: "Jid of the message recipient"
     required: true
   message:
     description: "Message to send"
@@ -23,4 +23,4 @@ inputs:
   port:
     description: "Server port"
     required: false
-    default: 5222
+    default: '5222'
