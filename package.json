@@ -1,24 +1,27 @@
 {
-  "name": "xmpp-action",
-  "version": "1.0.1",
-  "description": "Use xmpp in github actions",
-  "main": "index.js",
-  "scripts": {
-    "clean": "rm -f index.js*",
-    "build": "haxe build.hxml"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tong/xmpp-action.git"
-  },
-  "keywords": [
-    "xmpp",
-    "notification"
-  ],
-  "author": "tong@disktree.net",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tong/xmpp-action/issues"
-  },
-  "homepage": "https://github.com/tong/xmpp-action#readme"
+    "name": "xmpp-action",
+    "version": "1.0.1",
+    "description": "Use xmpp in github actions",
+    "main": "index.js",
+    "scripts": {
+        "clean": "rm -f index.js*",
+        "build": "haxe build.hxml"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tong/xmpp-action.git"
+    },
+    "keywords": [
+        "xmpp",
+        "workflow",
+        "action",
+        "notification",
+        "jabber"
+    ],
+    "author": "tong@disktree.net",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/tong/xmpp-action/issues"
+    },
+    "homepage": "https://github.com/tong/xmpp-action#readme"
 }
