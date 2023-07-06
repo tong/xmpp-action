@@ -11,16 +11,18 @@ inputs:
   password:
     description: "Account password"
     required: true
-  recipient:
-    description: "Jid of the message recipient"
-    required: true
   message:
     description: "Message to send"
     required: true
+  recipient:
+    description: "Jid of the message recipient"
+    required: false
+  muc:
+    description: "Muc jid (`room@service/nick`)"
+    required: false
   host:
     description: "Server host name"
     required: false
   port:
     description: "Server port"
     required: false
-    default: '5222'
