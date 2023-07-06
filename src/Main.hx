@@ -11,7 +11,7 @@ function main() {
     var message = Sys.getEnv('INPUT_MESSAGE');
     var host = Sys.getEnv('INPUT_HOST');
     var _port = Sys.getEnv('INPUT_PORT');
-    var port = (_port != null) ? Std.parseInt(_port) : xmpp.client.Stream.PORT;
+    var port : Int = (_port != null) ? Std.parseInt(_port) : xmpp.client.Stream.PORT;
     var _muc = Sys.getEnv('INPUT_MUC');
     var logoutDelay = 3000;//TODO:
 
@@ -23,10 +23,10 @@ function main() {
     var xmpp = new XmppClient();
     xmpp.login(jid, password, host, port, e -> {
         if(e == null){
-            Sys.println("Connected");
-            // xmpp.stream.send(new Presence());
+            //Sys.println("Connected");
+            //xmpp.stream.send(new Presence());
             if(recipient != null) {
-              //xmpp.notifyUser(recipient, message);
+              xmpp.notifyUser(recipient, message);
             }
             if(Jid.isValid(_muc)) {
               final mucjid : Jid = _muc;

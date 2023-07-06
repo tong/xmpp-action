@@ -66,7 +66,7 @@ class XmppClient {
 				stream.startTLS(success->{
 					if( success ) {
 						var tls = new js.node.tls.TLSSocket(socket, { requestCert: true, rejectUnauthorized: true });
-						tls.on('end', ()->console.log('TLSSocket disconnected'));
+						//tls.on('end', ()->console.log('TLSSocket disconnected'));
 						tls.on('error', e->console.error('TLSSocket error',e));
 						tls.on('data', recvData);
 						socket = tls;
