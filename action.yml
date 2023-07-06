@@ -26,3 +26,4 @@ inputs:
   port:
     description: "Server port"
     required: false
+    default: '5222'
