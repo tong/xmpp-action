@@ -37,6 +37,7 @@ jobs:
           message: |
             ${{ github.actor }} pushed ${{ github.event.ref }} ${{ github.event.compare }} with message:
             ${{ join(github.event.commits.*.message) }}
+          muc: ${{ secrets.muc }}
       - name: Send pr event notification
         uses: ./
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
